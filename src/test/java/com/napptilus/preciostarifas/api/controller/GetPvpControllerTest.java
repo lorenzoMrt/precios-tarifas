@@ -1,15 +1,15 @@
-package com.napptilus.preciostarifas.api.Controller;
+package com.napptilus.preciostarifas.api.controller;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import com.napptilus.preciostarifas.api.ApiTestCase;
 
-public class GetPvpControllerShould extends ApiTestCase {
+public class GetPvpControllerTest extends ApiTestCase {
 
     @Test
     public void should_return_pvp_at_1000() throws Exception {
-        whenGetRequestSentTo("/product-pvp?date=2020-06-14-10.00.00&product-id=35455&brand-id=1");
+        whenGetRequestSentTo("/product-pvp?date=2020-06-14-10.00.00&productId=35455&brandId=1");
 
         var jsonResponse = new JSONObject()
             .put("product-id", 35455)
