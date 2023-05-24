@@ -65,4 +65,17 @@ public class ProductServiceTest {
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
     }
+
+    @Test
+    public void should_return_pvp_of_3895_at_day_16_2100() {
+        Integer productId = 35455;
+        String date = "2020-06-16-10.00.00";
+        Integer brandId = 1;
+        
+        var productService = new ProductService();
+
+        var expectedPrice = 38.95;
+        Product actualProduct = productService.getProduct(productId, brandId, date);
+        assertEquals(expectedPrice, actualProduct.getPrice());
+    }
 }
