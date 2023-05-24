@@ -11,7 +11,7 @@ import com.napptilus.preciostarifas.api.model.Product;
 public class ProductServiceTest {
     
     @Test
-    public void should_return_pvp_of_3550_at_1000() {
+    public void should_return_pvp_of_3550_at_day_14_1000() {
 
         Integer productId = 35455;
         String date = "2020-06-14-10.00.00";
@@ -26,7 +26,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void should_return_pvp_of_2545_at_1600() {
+    public void should_return_pvp_of_2545_at_day_14_1600() {
 
         Integer productId = 35455;
         String date = "2020-06-14-16.00.00";
@@ -40,7 +40,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void should_return_pvp_of_3550_at_2100() {
+    public void should_return_pvp_of_3550_at_day_14_2100() {
 
         Integer productId = 35455;
         String date = "2020-06-14-21.00.00";

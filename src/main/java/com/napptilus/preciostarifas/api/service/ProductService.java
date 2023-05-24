@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -40,14 +41,12 @@ public class ProductService implements IProductService {
     }
 
     private Product returnProductByDateAndPriority(List<Product> products, Date date) {
-        List<Product> aux = new ArrayList<>();
-        for (Product product : products) {
-            if(date.before(product.getEndDate()) && date.after(product.getStartDate())) {
-                aux.add(product);
-            }
-        }
-        Collections.sort(aux, (d1, d2) -> d2.getPriority().compareTo(d1.getPriority()));
-        return aux.get(0);
+        
+        return products.stream()
+            .filter(product -> date.before(product.getEndDate()) && date.after(product.getStartDate()))
+            .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
+            .collect(Collectors.toList())
+            .get(0);
     }
 
 }
