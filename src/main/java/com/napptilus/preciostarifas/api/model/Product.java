@@ -42,7 +42,7 @@ public class Product {
     @Column(name = "PRIORITY")
     Integer priority;
 
-    public Product(int productId, int brandId, int priceListId, String startDate, String endDate, double price) {
+    public Product(int productId, int brandId, int priceListId, String startDate, String endDate, double price, int priority) {
         this.productId = Long.valueOf(productId);
         this.priceListId = Long.valueOf(priceListId);
         this.brandId = Long.valueOf(brandId);
@@ -54,6 +54,7 @@ public class Product {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        this.priority = priority;
     }
     
 }
