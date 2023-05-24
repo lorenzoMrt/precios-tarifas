@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.napptilus.preciostarifas.api.model.Product;
+import com.napptilus.preciostarifas.mapper.ProductMapper;
 
 @Service
 public class ProductService implements IProductService {
@@ -31,7 +32,7 @@ public class ProductService implements IProductService {
         Product product = null;
         try {
             product = returnProductByDateAndPriority(productList,
-                    new SimpleDateFormat("yyyy-mm-dd-HH.mm.ss").parse(date));
+                    new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(date));
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

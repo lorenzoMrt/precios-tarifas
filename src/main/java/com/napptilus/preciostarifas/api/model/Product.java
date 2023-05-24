@@ -48,8 +48,8 @@ public class Product {
         this.brandId = Long.valueOf(brandId);
         this.price = price;
         try {
-            this.startDate = new SimpleDateFormat("yyyy-mm-dd-HH.mm.ss").parse(startDate);
-            this.endDate = new SimpleDateFormat("yyyy-mm-dd-HH.mm.ss").parse(endDate);
+            this.startDate = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(startDate);
+            this.endDate = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(endDate);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

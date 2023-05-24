@@ -12,11 +12,11 @@ public class GetPvpControllerTest extends ApiTestCase {
         whenGetRequestSentTo("/product-pvp?date=2020-06-14-10.00.00&productId=35455&brandId=1");
 
         var jsonResponse = new JSONObject()
-            .put("product-id", 35455)
-            .put("brand-id", 1)
-            .put("price-list", 1)
-            .put("start-date", "2020-06-14-00.00.00")
-            .put("end-date", "2020-12-31-23.59.59")
+            .put("productId", 35455)
+            .put("brandId", 1)
+            .put("priceList", 1)
+            .put("startDate", "2020-06-14-00.00.00")
+            .put("endDate", "2020-12-31-23.59.59")
             .put("price", 35.50);
 
         assertSuccessJsonResponse(jsonResponse);
