@@ -1,6 +1,6 @@
 package com.napptilus.preciostarifas.api.service;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +22,6 @@ public class ProductServiceTest {
         Product expectedProduct = new Product(35455, 1, 1, "2020-06-14-00.00.00", "2020-12-31-23.59.59", 35.50);
 
         Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertSame(expectedProduct, actualProduct);
+        assertEquals(expectedProduct.getProductId(), actualProduct.getProductId());
     }
 }

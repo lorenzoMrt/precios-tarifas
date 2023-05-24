@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.service.ProductService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ public class GetPvpController {
     @Autowired
     ProductService productService;
     @GetMapping("/product-pvp")
-    public ResponseEntity<String> response(@RequestParam String date, @RequestParam Integer productId, @RequestParam Integer brandId, HttpServletResponse response) {
+    public ResponseEntity<Product> response(@RequestParam String date, @RequestParam Integer productId, @RequestParam Integer brandId, HttpServletResponse response) {
         response.addHeader("content-type", "application/json");
 
         var jsonObject = productService.getProduct(productId, brandId, date);
