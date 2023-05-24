@@ -19,7 +19,7 @@ public class GetPvpController {
     public ResponseEntity<String> response(@RequestParam String date, @RequestParam Integer productId, @RequestParam Integer brandId, HttpServletResponse response) {
         response.addHeader("content-type", "application/json");
 
-        var jsonObject = productService.getPvpForProduct(productId, brandId, date);
+        var jsonObject = productService.getProduct(productId, brandId, date);
         
         return ResponseEntity.ok(jsonObject);
     }

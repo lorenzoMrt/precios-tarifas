@@ -1,5 +1,7 @@
 package com.napptilus.preciostarifas.api.service;
 
+import com.napptilus.preciostarifas.api.model.Product;
+
 public interface IProductService {
-    String getPvpForProduct(Integer productId, Integer brandId, String date);
+    Product getProduct(Integer productId, Integer brandId, String date);
 }
