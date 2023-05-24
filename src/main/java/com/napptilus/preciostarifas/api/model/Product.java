@@ -1,5 +1,7 @@
 package com.napptilus.preciostarifas.api.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -41,6 +43,17 @@ public class Product {
     Integer priority;
 
     public Product(int productId, int brandId, int priceListId, String startDate, String endDate, double price) {
+        this.productId = Long.valueOf(productId);
+        this.priceListId = Long.valueOf(priceListId);
+        this.brandId = Long.valueOf(brandId);
+        this.price = price;
+        try {
+            this.startDate = new SimpleDateFormat("yyyy-mm-dd-HH.mm.ss").parse(startDate);
+            this.endDate = new SimpleDateFormat("yyyy-mm-dd-HH.mm.ss").parse(endDate);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
 }
