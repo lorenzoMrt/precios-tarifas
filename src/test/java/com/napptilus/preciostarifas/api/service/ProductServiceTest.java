@@ -1,6 +1,7 @@
 package com.napptilus.preciostarifas.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.napptilus.preciostarifas.ProductMother;
+import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
 import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
@@ -108,5 +110,14 @@ public class ProductServiceTest {
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
+    }
+
+    @Test
+    public void should_throw_product_not_found_exception() {
+        Integer productId = 35455;
+        String date = "0000-00-00-00.00.00";
+        Integer brandId = 1;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(null);
+        assertThrows(ProductNotFoundException.class, productService.getProduct(productId, brandId, date));
     }
 }
