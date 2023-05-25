@@ -25,24 +25,20 @@ public class ProductService implements IProductService {
         List<Product> productList = productRepository.findByProductIdAndBrandId(productId, brandId);
 
         Product product = null;
-        try {
-            product = returnProductByDateAndPriority(productList,
-                    new SimpleDateFormat(DateUtils.FORMAT).parse(date));
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
+        product = returnProductByDateAndPriority(productList,
+                DateUtils.createDateFor(date));
 
         return product;
     }
 
     private Product returnProductByDateAndPriority(List<Product> products, Date date) {
-        
+
         return products.stream()
-            .filter(product -> date.before(product.getEndDate()) && date.after(product.getStartDate()))
-            .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
-            .collect(Collectors.toList())
-            .get(0);
+                .filter(product -> date.before(product.getEndDate()) && date.after(product.getStartDate()))
+                .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
+                .collect(Collectors.toList())
+                .get(0);
     }
 
 }
