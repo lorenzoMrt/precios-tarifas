@@ -3,7 +3,6 @@ package com.napptilus.preciostarifas.api.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -43,7 +42,7 @@ public class ProductServiceTest {
         String date = "2020-06-14-10.00.00";
         Integer brandId = 1;
         
-        var productService = new ProductService();
+        
 
         var expectedPrice = 35.50;
 
@@ -60,7 +59,7 @@ public class ProductServiceTest {
         String date = "2020-06-14-16.00.00";
         Integer brandId = 1;
         
-        var productService = new ProductService();
+        
 
         var expectedPrice = 25.45;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
@@ -75,7 +74,7 @@ public class ProductServiceTest {
         String date = "2020-06-14-21.00.00";
         Integer brandId = 1;
         
-        var productService = new ProductService();
+        
 
         var expectedPrice = 35.50;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
@@ -89,7 +88,7 @@ public class ProductServiceTest {
         String date = "2020-06-15-10.00.00";
         Integer brandId = 1;
         
-        var productService = new ProductService();
+        
 
         var expectedPrice = 30.50;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
@@ -103,7 +102,7 @@ public class ProductServiceTest {
         String date = "2020-06-16-10.00.00";
         Integer brandId = 1;
         
-        var productService = new ProductService();
+        
 
         var expectedPrice = 38.95;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
