@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.napptilus.preciostarifas.DateUtils;
 import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
@@ -26,7 +27,7 @@ public class ProductService implements IProductService {
         Product product = null;
         try {
             product = returnProductByDateAndPriority(productList,
-                    new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(date));
+                    new SimpleDateFormat(DateUtils.FORMAT).parse(date));
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
