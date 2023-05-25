@@ -1,14 +1,40 @@
 package com.napptilus.preciostarifas.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.napptilus.preciostarifas.ProductMother;
 import com.napptilus.preciostarifas.api.model.Product;
+import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
 @SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ProductServiceTest {
+    
+    
+    @Mock
+    private ProductRepository productRepository;
+    
+    @InjectMocks
+    private ProductService productService;
+    
+    @BeforeAll
+    public  void openMocks() {
+        MockitoAnnotations.openMocks(ProductServiceTest.class);
+    }
+
     
     @Test
     public void should_return_pvp_of_3550_at_day_14_1000() {
@@ -20,6 +46,8 @@ public class ProductServiceTest {
         var productService = new ProductService();
 
         var expectedPrice = 35.50;
+
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
@@ -35,6 +63,7 @@ public class ProductServiceTest {
         var productService = new ProductService();
 
         var expectedPrice = 25.45;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
     }
@@ -49,6 +78,7 @@ public class ProductServiceTest {
         var productService = new ProductService();
 
         var expectedPrice = 35.50;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
     }
@@ -62,6 +92,7 @@ public class ProductServiceTest {
         var productService = new ProductService();
 
         var expectedPrice = 30.50;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
     }
@@ -75,6 +106,7 @@ public class ProductServiceTest {
         var productService = new ProductService();
 
         var expectedPrice = 38.95;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         Product actualProduct = productService.getProduct(productId, brandId, date);
         assertEquals(expectedPrice, actualProduct.getPrice());
     }
