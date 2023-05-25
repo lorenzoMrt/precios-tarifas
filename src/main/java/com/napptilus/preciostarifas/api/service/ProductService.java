@@ -21,7 +21,6 @@ public class ProductService implements IProductService {
     @Override
     public Product getProduct(Integer productId, Integer brandId, String date) {
 
-
         List<Product> productList = productRepository.findByProductIdAndBrandId(productId, brandId);
 
         Product product = null;

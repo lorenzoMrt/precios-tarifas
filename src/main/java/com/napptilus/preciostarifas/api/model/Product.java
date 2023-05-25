@@ -1,11 +1,12 @@
 package com.napptilus.preciostarifas.api.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -18,24 +19,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
     @Column(name = "BRAND_ID")
-    Long brandId;
+    Integer brandId;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "START_DATE")
     Date startDate;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "END_DATE")
     Date endDate;
 
-    @Id
     @Column(name = "PRODUCT_ID")
-    Long productId;
+    Integer productId;
 
     @Column(name = "PRICE_LIST")
-    Long priceListId;
+    Integer priceListId;
 
     @Column(name = "PRICE")
     Double price;
@@ -46,19 +49,16 @@ public class Product {
     @Column(name = "PRIORITY")
     Integer priority;
 
-    public Product(int productId, int brandId, int priceListId, String startDate, String endDate, double price, int priority) {
-        this.productId = Long.valueOf(productId);
-        this.priceListId = Long.valueOf(priceListId);
-        this.brandId = Long.valueOf(brandId);
+    public Product(int brandId,Date startDate, Date endDate,Integer productId, int priceListId, double price, String currency, int priority) {
+        this.productId = productId;
+        this.priceListId = priceListId;
+        this.brandId = brandId;
         this.price = price;
-        try {
-            this.startDate = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(startDate);
-            this.endDate = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").parse(endDate);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.currency = currency;
         this.priority = priority;
     }
+
     
 }

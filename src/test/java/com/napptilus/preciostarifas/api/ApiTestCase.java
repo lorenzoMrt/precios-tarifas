@@ -19,7 +19,6 @@ public abstract class ApiTestCase {
     private MockMvc mockMvc;
     private ResultActions currentRequest;
 
-
     protected void assertJsonResponse(
             String endpoint,
             Integer expectedStatusCode,
