@@ -1,14 +1,24 @@
 package com.napptilus.preciostarifas.api.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.napptilus.preciostarifas.ProductMother;
 import com.napptilus.preciostarifas.api.ApiTestCase;
+import com.napptilus.preciostarifas.api.repository.ProductRepository;
+
 
 public class GetPvpControllerTest extends ApiTestCase {
-
+    
+    @MockBean
+    private ProductRepository productRepository;
     @Test
     public void should_return_pvp_at_1000() throws Exception {
+        when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(ProductMother.mockProductList());
         whenGetRequestSentTo("/product-pvp?date=2020-06-14-10.00.00&productId=35455&brandId=1");
 
         var jsonResponse = new JSONObject()
