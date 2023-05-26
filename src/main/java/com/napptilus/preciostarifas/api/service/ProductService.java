@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.napptilus.preciostarifas.DateUtils;
 import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
@@ -19,7 +20,7 @@ public class ProductService implements IProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product getProduct(Integer productId, Integer brandId, String date) throws ProductNotFoundException {
+    public Product getProduct(Integer productId, Integer brandId, String date) throws ProductNotFoundException, WrongDateFormatException {
 
         List<Product> productList = productRepository.findByProductIdAndBrandId(productId, brandId);
 

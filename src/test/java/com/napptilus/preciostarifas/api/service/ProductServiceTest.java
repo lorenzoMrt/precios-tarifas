@@ -39,7 +39,7 @@ public class ProductServiceTest {
 
     
     @Test
-    public void should_return_pvp_of_3550_at_day_14_1000() {
+    public void should_return_pvp_of_3550_at_day_14_1000() throws WrongDateFormatException {
 
         Integer productId = 35455;
         String date = "2020-06-14-10.00.00";
@@ -58,11 +58,14 @@ public class ProductServiceTest {
         } catch (ProductNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (WrongDateFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void should_return_pvp_of_2545_at_day_14_1600() {
+    public void should_return_pvp_of_2545_at_day_14_1600() throws WrongDateFormatException {
 
         Integer productId = 35455;
         String date = "2020-06-14-16.00.00";
@@ -79,11 +82,14 @@ public class ProductServiceTest {
         } catch (ProductNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (WrongDateFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void should_return_pvp_of_3550_at_day_14_2100() {
+    public void should_return_pvp_of_3550_at_day_14_2100() throws WrongDateFormatException {
 
         Integer productId = 35455;
         String date = "2020-06-14-21.00.00";
@@ -100,11 +106,14 @@ public class ProductServiceTest {
         } catch (ProductNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (WrongDateFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void should_return_pvp_of_3050_at_day_15_1000() {
+    public void should_return_pvp_of_3050_at_day_15_1000() throws WrongDateFormatException {
         Integer productId = 35455;
         String date = "2020-06-15-10.00.00";
         Integer brandId = 1;
@@ -120,11 +129,14 @@ public class ProductServiceTest {
         } catch (ProductNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (WrongDateFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void should_return_pvp_of_3895_at_day_16_2100() {
+    public void should_return_pvp_of_3895_at_day_16_2100() throws WrongDateFormatException {
         Integer productId = 35455;
         String date = "2020-06-16-10.00.00";
         Integer brandId = 1;
@@ -138,6 +150,9 @@ public class ProductServiceTest {
             actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
         } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (WrongDateFormatException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

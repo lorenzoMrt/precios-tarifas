@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
@@ -23,7 +24,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         populateDatabase();
     }
 
-    private void populateDatabase() {
+    private void populateDatabase() throws WrongDateFormatException {
         var product1 = new Product(1, DateUtils.createDateFor("2020-06-14-00.00.00"), DateUtils.createDateFor("2020-12-31-23.59.59"), 35455, 1, 35.50, CURR, 0);
         productRepository.save(product1);
         var product2 = new Product(1, DateUtils.createDateFor("2020-06-14-15.00.00"), DateUtils.createDateFor("2020-06-14-18.30.00"), 35455, 2, 25.45, CURR, 1);

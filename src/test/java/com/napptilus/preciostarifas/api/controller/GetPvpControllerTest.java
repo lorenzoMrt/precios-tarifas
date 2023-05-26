@@ -42,9 +42,9 @@ public class GetPvpControllerTest extends ApiTestCase {
     }
     
     @Test
-    public void should_return_500_wrong_date_format() throws Exception {
+    public void should_return_400_wrong_date_format() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
         whenGetRequestSentTo("/product-pvp?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
-        assertStatusCodeIs(500);
+        assertStatusCodeIs(400);
     }
 }

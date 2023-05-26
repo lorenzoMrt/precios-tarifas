@@ -3,13 +3,14 @@ package com.napptilus.preciostarifas;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.model.Product;
 
 public class ProductMother {
 
     private static final String CURR = "EUR";
 
-    public static List<Product> mockProductList() {
+    public static List<Product> mockProductList() throws WrongDateFormatException {
         var productList = new ArrayList<Product>();
 
         var product1 = new Product(1, DateUtils.createDateFor("2020-06-14-00.00.00"),
