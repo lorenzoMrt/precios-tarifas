@@ -1,8 +1,7 @@
 package com.napptilus.preciostarifas.api.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,31 +19,37 @@ public class ProductService implements IProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product getProduct(Integer productId, Integer brandId, String date) throws ProductNotFoundException, WrongDateFormatException {
+    public Product getProduct(Integer productId, Integer brandId, String date)
+            throws ProductNotFoundException, WrongDateFormatException {
 
         List<Product> productList = productRepository.findByProductIdAndBrandId(productId, brandId);
+        if(productList == null) {
+            throw new ProductNotFoundException("Product not found");
+        }
 
-        Product product = null;
-
-        product = returnProductByDateAndPriority(productList,
+        var product = returnProductByDateAndPriority(productList,
                 DateUtils.createDateFor(date));
 
         return product;
     }
 
-    private Product returnProductByDateAndPriority(List<Product> products, Date date) throws ProductNotFoundException {
-        Product productResult = null;
-        try {
-            
-            productResult = products.stream()
-                    .filter(product -> date.before(product.getEndDate()) && date.after(product.getStartDate()))
-                    .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
-                    .collect(Collectors.toList())
-                    .get(0);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-           throw new ProductNotFoundException("Product not found");
-        }
-        return productResult;
+    /**
+     * Returns a {@link Product} based on the given date and priority from a list of
+     * products.
+     * 
+     * @param products The list of products to search from.
+     * @param date     The date used to filter the products.
+     * @return Product The product with the highest priority that matches the given
+     *         date.
+     * @throws ProductNotFoundException If no product is found for the given date.
+     */
+    private Product returnProductByDateAndPriority(List<Product> products, LocalDateTime date) throws ProductNotFoundException {
+
+        var productResult = products.stream()
+                .filter(product -> date.isBefore(product.getEndDate()) && date.isAfter(product.getStartDate()))
+                .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
+                .findFirst();
+        return productResult.orElseThrow(() -> new ProductNotFoundException("Product not found"));
     }
 
 }

@@ -18,7 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.napptilus.preciostarifas.ProductMother;
 import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
-import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
 @SpringBootTest
@@ -125,7 +124,7 @@ public class ProductServiceTest {
     @Test
     public void should_throw_product_not_found_exception() {
         Integer productId = 35455;
-        String date = "0000-00-00-00.00.00";
+        String date = "2023-01-10-00.00.00";
         Integer brandId = 1;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(null);
         ProductNotFoundException thrown = assertThrows(ProductNotFoundException.class, () -> productService.getProduct(productId, brandId, date));
@@ -139,9 +138,13 @@ public class ProductServiceTest {
         Integer productId = 35455;
         String date = "0000-0023-00_00.00.00";
         Integer brandId = 1;
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(null);
+        try {
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+        } catch (WrongDateFormatException e) {
+            fail("test failed to an unexpected error:" + e.getClass());
+        }
         WrongDateFormatException thrown = assertThrows(WrongDateFormatException.class, () -> productService.getProduct(productId, brandId, date));
 
-        assertEquals("Wrong date format. Example: 1960-12-11-10.00.00", thrown.getMessage());
+        assertEquals("Wrong date format", thrown.getMessage());
     }
 }
