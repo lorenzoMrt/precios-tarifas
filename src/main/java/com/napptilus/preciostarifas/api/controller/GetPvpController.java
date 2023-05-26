@@ -21,7 +21,7 @@ public class GetPvpController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/product-pvp")
+    @GetMapping("products")
     public ResponseEntity<ProductDto> response(@RequestParam String date, @RequestParam Integer productId,
             @RequestParam Integer brandId, HttpServletResponse response) throws ProductNotFoundException, WrongDateFormatException, InvalidParameterException {
         response.addHeader("content-type", "application/json");

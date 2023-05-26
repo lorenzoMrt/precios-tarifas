@@ -23,7 +23,7 @@ public class GetPvpControllerTest extends ApiTestCase {
     @Test
     public void should_return_pvp_at_1000() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(ProductMother.mockProductList());
-        whenGetRequestSentTo("/product-pvp?date=2020-06-14-10.00.00&productId=35455&brandId=1");
+        whenGetRequestSentTo("/products?date=2020-06-14-10.00.00&productId=35455&brandId=1");
 
         var jsonResponse = new JSONObject()
             .put("productId", 35455)
@@ -40,7 +40,7 @@ public class GetPvpControllerTest extends ApiTestCase {
     public void should_return_404_product_not_found() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
 
-        assertExceptionIsThrown(ProductNotFoundException.class, "/product-pvp?date=0000-00-00-10.00.00&productId=35455&brandId=1");
+        assertExceptionIsThrown(ProductNotFoundException.class, "/products?date=0000-00-00-10.00.00&productId=35455&brandId=1");
 
     }
 
@@ -48,12 +48,12 @@ public class GetPvpControllerTest extends ApiTestCase {
     public void should_return_400_wrong_date_format() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
 
-        assertExceptionIsThrown(WrongDateFormatException.class, "/product-pvp?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
+        assertExceptionIsThrown(WrongDateFormatException.class, "/products?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
     }
 
     @Test
     public void should_return_400_invalid_parameter_value() throws Exception {
-        assertExceptionIsThrown(InvalidParameterException.class, "/product-pvp?date=2020-06-14-10.00.00&productId=-35455&brandId=-1");
+        assertExceptionIsThrown(InvalidParameterException.class, "/products?date=2020-06-14-10.00.00&productId=-35455&brandId=-1");
         
     }
 }
