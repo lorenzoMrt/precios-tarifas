@@ -3,6 +3,7 @@ package com.napptilus.preciostarifas.api.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -47,5 +48,11 @@ public class GetPvpControllerTest extends ApiTestCase {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
 
         assertExceptionIsThrown(WrongDateFormatException.class, "/product-pvp?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
+    }
+
+    @Test
+    public void should_return_400_invalid_parameter_value() throws Exception {
+        assertExceptionIsThrown(InvalidParameterException.class, "/product-pvp?date=2020-06-14-10.00.00&productId=-35455&brandId=-1");
+        
     }
 }

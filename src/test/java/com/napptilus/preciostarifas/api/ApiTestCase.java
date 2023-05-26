@@ -15,6 +15,7 @@ import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public abstract class ApiTestCase {
@@ -77,6 +78,10 @@ public abstract class ApiTestCase {
         if(class1 instanceof WrongDateFormatException) {
             mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isBadRequest());
 
+        }
+
+        if(class1 instanceof InvalidParameterException) {
+            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isBadRequest());
         }
     }
 }
