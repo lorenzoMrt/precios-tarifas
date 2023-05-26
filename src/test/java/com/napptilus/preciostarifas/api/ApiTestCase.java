@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.napptilus.preciostarifas.api.exception.InvalidParameterException;
 import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
 import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 
@@ -72,16 +73,16 @@ public abstract class ApiTestCase {
     }
 
     protected void assertExceptionIsThrown(Object class1, String endpoint) throws Exception {
+        var result = mockMvc.perform(get(endpoint));
         if(class1 instanceof ProductNotFoundException) {
-            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isNotFound());
+            result.andExpect(MockMvcResultMatchers.status().isNotFound());
         }
         if(class1 instanceof WrongDateFormatException) {
-            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+            result.andExpect(MockMvcResultMatchers.content().string("Wrong date format"));
 
         }
-
         if(class1 instanceof InvalidParameterException) {
-            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+            result.andExpect(MockMvcResultMatchers.content().string("Invalid parameter values"));
         }
     }
 }

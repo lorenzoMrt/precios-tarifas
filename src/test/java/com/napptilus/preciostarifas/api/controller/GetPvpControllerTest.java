@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.napptilus.preciostarifas.ProductMother;
 import com.napptilus.preciostarifas.api.ApiTestCase;
+import com.napptilus.preciostarifas.api.exception.InvalidParameterException;
 import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
 import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;

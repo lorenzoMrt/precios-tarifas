@@ -15,13 +15,19 @@ public class GetPvpControllerExceptionHandler extends ResponseEntityExceptionHan
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String handleProductNotFound(RuntimeException ex) {
+    public String handleProductNotFound(ProductNotFoundException ex) {
         return ex.getMessage();
     }
     @ExceptionHandler(WrongDateFormatException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleWrongDateFormat(RuntimeException ex) {
+    public String handleWrongDateFormat(WrongDateFormatException ex) {
+        return ex.getMessage();
+    }
+    @ExceptionHandler(InvalidParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleInvalidParameterValue(InvalidParameterException ex) {
         return ex.getMessage();
     }
 }
