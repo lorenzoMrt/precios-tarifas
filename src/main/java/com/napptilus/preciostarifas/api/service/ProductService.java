@@ -41,7 +41,7 @@ public class ProductService implements IProductService {
                     .sorted((d1, d2) -> d2.getPriority().compareTo(d1.getPriority()))
                     .collect(Collectors.toList())
                     .get(0);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
            throw new ProductNotFoundException("Product not found");
         }
         return productResult;

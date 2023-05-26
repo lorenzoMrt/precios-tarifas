@@ -1,5 +1,7 @@
 package com.napptilus.preciostarifas.api.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -9,13 +11,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.napptilus.preciostarifas.ProductMother;
 import com.napptilus.preciostarifas.api.ApiTestCase;
+import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
 
-
 public class GetPvpControllerTest extends ApiTestCase {
-    
+
     @MockBean
     private ProductRepository productRepository;
+
     @Test
     public void should_return_pvp_at_1000() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(ProductMother.mockProductList());
@@ -36,15 +40,14 @@ public class GetPvpControllerTest extends ApiTestCase {
     public void should_return_404_product_not_found() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
 
-        whenGetRequestSentTo("/product-pvp?date=0000-00-00-10.00.00&productId=35455&brandId=1");
+        assertExceptionIsThrown(ProductNotFoundException.class, "/product-pvp?date=0000-00-00-10.00.00&productId=35455&brandId=1");
 
-        assertStatusCodeIs(404);
     }
-    
+
     @Test
     public void should_return_400_wrong_date_format() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
-        whenGetRequestSentTo("/product-pvp?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
-        assertStatusCodeIs(400);
+
+        assertExceptionIsThrown(WrongDateFormatException.class, "/product-pvp?date=0000-00234-00_10.00.00&productId=35455&brandId=1");
     }
 }

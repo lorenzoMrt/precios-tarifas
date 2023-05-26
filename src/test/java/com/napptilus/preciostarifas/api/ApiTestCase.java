@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -64,6 +68,16 @@ public abstract class ApiTestCase {
         assertStatusCodeIs(statusCode);
         assertContentTypeIsA("application/json");
         assertResponseIs(json.toString());
+    }
+
+    protected void assertExceptionIsThrown(Object class1, String endpoint) throws Exception {
+        if(class1 instanceof ProductNotFoundException) {
+            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isNotFound());
+        }
+        if(class1 instanceof WrongDateFormatException) {
+            mockMvc.perform(get(endpoint)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        }
     }
 }
 
