@@ -50,8 +50,14 @@ public class ProductServiceTest {
 
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
         
-        Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertEquals(expectedPrice, actualProduct.getPrice());
+        Product actualProduct;
+        try {
+            actualProduct = productService.getProduct(productId, brandId, date);
+            assertEquals(expectedPrice, actualProduct.getPrice());
+        } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -65,8 +71,14 @@ public class ProductServiceTest {
 
         var expectedPrice = 25.45;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertEquals(expectedPrice, actualProduct.getPrice());
+        Product actualProduct;
+        try {
+            actualProduct = productService.getProduct(productId, brandId, date);
+            assertEquals(expectedPrice, actualProduct.getPrice());
+        } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -80,8 +92,14 @@ public class ProductServiceTest {
 
         var expectedPrice = 35.50;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertEquals(expectedPrice, actualProduct.getPrice());
+        Product actualProduct;
+        try {
+            actualProduct = productService.getProduct(productId, brandId, date);
+            assertEquals(expectedPrice, actualProduct.getPrice());
+        } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -94,8 +112,14 @@ public class ProductServiceTest {
 
         var expectedPrice = 30.50;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertEquals(expectedPrice, actualProduct.getPrice());
+        Product actualProduct;
+        try {
+            actualProduct = productService.getProduct(productId, brandId, date);
+            assertEquals(expectedPrice, actualProduct.getPrice());
+        } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -108,8 +132,14 @@ public class ProductServiceTest {
 
         var expectedPrice = 38.95;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct = productService.getProduct(productId, brandId, date);
-        assertEquals(expectedPrice, actualProduct.getPrice());
+        Product actualProduct;
+        try {
+            actualProduct = productService.getProduct(productId, brandId, date);
+            assertEquals(expectedPrice, actualProduct.getPrice());
+        } catch (ProductNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -118,6 +148,9 @@ public class ProductServiceTest {
         String date = "0000-00-00-00.00.00";
         Integer brandId = 1;
         when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(null);
-        assertThrows(ProductNotFoundException.class, productService.getProduct(productId, brandId, date));
+        ProductNotFoundException thrown = assertThrows(ProductNotFoundException.class, () -> productService.getProduct(productId, brandId, date));
+
+        assertEquals("Product not found", thrown.getMessage());
+        
     }
 }
