@@ -33,9 +33,9 @@ public class GetPvpControllerTest extends ApiTestCase {
     }
 
     @Test
-    public void test() throws Exception {
+    public void should_return_404_product_not_found() throws Exception {
         when(productRepository.findByProductIdAndBrandId(any(), any())).thenReturn(null);
-        
+
         whenGetRequestSentTo("/product-pvp?date=0000-00-00-10.00.00&productId=35455&brandId=1");
 
         assertStatusCodeIs(404);
