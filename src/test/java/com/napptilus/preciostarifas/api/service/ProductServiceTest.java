@@ -2,6 +2,7 @@ package com.napptilus.preciostarifas.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -39,123 +40,86 @@ public class ProductServiceTest {
 
     
     @Test
-    public void should_return_pvp_of_3550_at_day_14_1000() throws WrongDateFormatException {
+    public void should_return_pvp_of_3550_at_day_14_1000() {
 
         Integer productId = 35455;
         String date = "2020-06-14-10.00.00";
         Integer brandId = 1;
-        
-        
-
         var expectedPrice = 35.50;
 
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        
-        Product actualProduct;
         try {
-            actualProduct = productService.getProduct(productId, brandId, date);
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+            var actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
-        } catch (ProductNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (WrongDateFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (WrongDateFormatException | ProductNotFoundException e) {
+            fail("test failed to an unexpected error:" + e.getClass());
         }
     }
 
     @Test
-    public void should_return_pvp_of_2545_at_day_14_1600() throws WrongDateFormatException {
+    public void should_return_pvp_of_2545_at_day_14_1600() {
 
         Integer productId = 35455;
         String date = "2020-06-14-16.00.00";
         Integer brandId = 1;
-        
-        
-
         var expectedPrice = 25.45;
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct;
+        
         try {
-            actualProduct = productService.getProduct(productId, brandId, date);
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+            var actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
-        } catch (ProductNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (WrongDateFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (WrongDateFormatException | ProductNotFoundException e) {
+            fail("test failed to an unexpected error:" + e.getClass());
         }
     }
 
     @Test
-    public void should_return_pvp_of_3550_at_day_14_2100() throws WrongDateFormatException {
+    public void should_return_pvp_of_3550_at_day_14_2100() {
 
         Integer productId = 35455;
         String date = "2020-06-14-21.00.00";
         Integer brandId = 1;
-        
-        
-
         var expectedPrice = 35.50;
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct;
+        
         try {
-            actualProduct = productService.getProduct(productId, brandId, date);
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+            var actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
-        } catch (ProductNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (WrongDateFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (WrongDateFormatException | ProductNotFoundException e) {
+            fail("test failed to an unexpected error:" + e.getClass());
         }
     }
 
     @Test
-    public void should_return_pvp_of_3050_at_day_15_1000() throws WrongDateFormatException {
+    public void should_return_pvp_of_3050_at_day_15_1000() {
         Integer productId = 35455;
         String date = "2020-06-15-10.00.00";
         Integer brandId = 1;
-        
-        
-
         var expectedPrice = 30.50;
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct;
+
         try {
-            actualProduct = productService.getProduct(productId, brandId, date);
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+            var actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
-        } catch (ProductNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (WrongDateFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } catch (ProductNotFoundException | WrongDateFormatException e) {
+           fail("test failed to an unexpected error:" + e.getClass());
+        } 
     }
 
     @Test
-    public void should_return_pvp_of_3895_at_day_16_2100() throws WrongDateFormatException {
+    public void should_return_pvp_of_3895_at_day_16_2100() {
         Integer productId = 35455;
         String date = "2020-06-16-10.00.00";
         Integer brandId = 1;
-        
-        
-
         var expectedPrice = 38.95;
-        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
-        Product actualProduct;
+
         try {
-            actualProduct = productService.getProduct(productId, brandId, date);
+            when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(ProductMother.mockProductList());
+           var actualProduct = productService.getProduct(productId, brandId, date);
             assertEquals(expectedPrice, actualProduct.getPrice());
-        } catch (ProductNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (WrongDateFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } catch (ProductNotFoundException | WrongDateFormatException e) {
+            fail("test failed to an unexpected error:" + e.getClass());
+        } 
     }
 
     @Test
