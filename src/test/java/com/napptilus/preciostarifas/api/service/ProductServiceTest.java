@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.napptilus.preciostarifas.ProductMother;
+import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.exception.ProductNotFoundException;
 import com.napptilus.preciostarifas.api.model.Product;
 import com.napptilus.preciostarifas.api.repository.ProductRepository;
@@ -152,5 +153,16 @@ public class ProductServiceTest {
 
         assertEquals("Product not found", thrown.getMessage());
         
+    }
+
+    @Test
+    public void should_throw_wrong_date_format_exception() {
+        Integer productId = 35455;
+        String date = "0000-0023-00_00.00.00";
+        Integer brandId = 1;
+        when(productRepository.findByProductIdAndBrandId(productId, brandId)).thenReturn(null);
+        WrongDateFormatException thrown = assertThrows(WrongDateFormatException.class, () -> productService.getProduct(productId, brandId, date));
+
+        assertEquals("Wrong date format. Example: 1960-12-11-10.00.00", thrown.getMessage());
     }
 }
