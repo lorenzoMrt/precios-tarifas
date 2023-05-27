@@ -13,8 +13,12 @@ import com.napptilus.preciostarifas.api.exception.WrongDateFormatException;
 import com.napptilus.preciostarifas.api.service.ProductService;
 import com.napptilus.preciostarifas.mapper.ProductMapper;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Tag(name = "Product")
 @RestController
 public class GetPvpController {
 
@@ -22,8 +26,12 @@ public class GetPvpController {
     ProductService productService;
 
     @GetMapping("products")
-    public ResponseEntity<ProductDto> response(@RequestParam String date, @RequestParam Integer productId,
-            @RequestParam Integer brandId, HttpServletResponse response) throws ProductNotFoundException, WrongDateFormatException, InvalidParameterException {
+    @ApiResponse(responseCode = "404", description = "Product not found")
+    @ApiResponse(responseCode = "400", description = "Id's cannot be negative")
+    public ResponseEntity<ProductDto> response(
+        @Parameter(description = "Date in yyyy-MM-dd-HH-mm-ss format", required = true, example = "2020-06-15-00.00.00") @RequestParam String date,
+        @Parameter(description = "ID of product", required = true, example = "35455") @RequestParam Integer productId,
+        @Parameter(description = "ID of brand", required = true, example = "1") @RequestParam Integer brandId, HttpServletResponse response) throws ProductNotFoundException, WrongDateFormatException, InvalidParameterException {
         response.addHeader("content-type", "application/json");
 
         if(productId < 0 || brandId < 0) {

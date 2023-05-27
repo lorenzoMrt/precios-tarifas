@@ -16,32 +16,14 @@ mvn spring-boot:run
 5. The API will be available at http://localhost:8080/
 
 ## API Endpoints
+----
+After running the application, the documentation for the API will be available at http://localhost:8080/swagger-ui.html
 
-### Get Product By ID, brand ID and Date
-- Endpoint: /products?productId={productId}&brandId={brandId}&date={date}
-- Method: GET
-- Description: Retrieves the product information for the given product ID, brand ID, and date.
-- Response:
-    - Status Code: 200
-    - Body: Product information
-- Sample request:
-    ```
-    curl 'http://localhost:8080/products?productId=35455&brandId=1&date=2020-06-14-10.00.00'
-    ```
-- Sample response:
-    - Status Code: 200
-    - Body: 
-    ```
-    {
-        "productId": 35455,
-        "brandId": 1,
-        "priceList": 1,
-        "startDate": "2020-06-14-00.00.00",
-        "endDate": "2020-12-31-23.59.59",
-        "price": 35.5
-    }
-    ```
-## Error handling
+### Error handling
 If any error occurs, appropriate HTTP status code will be returned along with the error message.
 - **404** (Product not found): If product is not found for the given parameters
 - **400** (Invalid request): If parameters are not valid
+
+## Configuration
+----
+The application can be configured by modifying the application.properties file located in the resources directory. You can customize various settings such as the server port, database configuration, or external service integration.
